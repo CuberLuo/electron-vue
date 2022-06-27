@@ -13,6 +13,8 @@ module.exports = {
     // 关闭函数名与括号之间要求存在空格的问题
     'space-before-function-paren': 'off',
     // 关闭不允许vue文件单个单词问题
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    // 关闭导入组件未使用报错问题
+    'no-unused-vars': 'off'
   }
 }
