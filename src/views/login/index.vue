@@ -37,6 +37,7 @@
             :disabled="disabled"
             type="primary"
             html-type="submit"
+            :loading="loading"
             class="login-form-button"
           >
             登录
@@ -48,7 +49,7 @@
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { message } from 'ant-design-vue'
 import { HttpRequest } from '@/utils/httpRequest'
@@ -69,10 +70,13 @@ const formState = reactive({
   username: '',
   password: ''
 })
+const loading = ref(false)
 const onFinish = (values) => {
+  loading.value = true
   http
     .post('/login', values)
     .then((data) => {
+      loading.value = false
       if (data.code === 10000) {
         message.success('登录成功')
         router.push('/layout')
@@ -83,7 +87,8 @@ const onFinish = (values) => {
       }
     })
     .catch((error) => {
-      console.log(error)
+      loading.value = false
+      message.error('网络连接失败' + error)
     })
 }
 
