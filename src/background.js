@@ -12,7 +12,7 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    icon: '../build/icons/zjut.png',
+    icon: '../build/icons/zjut.ico',
     width: 1100,
     height: 800,
     resizable: false,

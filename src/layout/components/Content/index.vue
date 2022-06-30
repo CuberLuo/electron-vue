@@ -3,7 +3,7 @@
     <div :style="{ padding: '24px', minHeight: '640px' }">
       <router-view v-slot="{ Component, route }">
         <transition name="fade-transform" mode="out-in">
-          <keep-alive>
+          <keep-alive :exclude="['query-score', 'query-teach']">
             <component :is="Component" :key="route.path" />
           </keep-alive>
         </transition>

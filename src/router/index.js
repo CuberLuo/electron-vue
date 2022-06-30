@@ -13,6 +13,7 @@ const routes = [
   {
     path: '/layout',
     name: 'layout',
+    redirect: '/students-manage',
     component: () => import('@/layout'),
     children: [
       {
@@ -29,6 +30,26 @@ const routes = [
         path: '/students-region',
         name: 'students-region',
         component: () => import('@/views/students-region')
+      },
+      {
+        path: '/query-score',
+        name: 'query-score',
+        component: () => import('@/views/query-score')
+      },
+      {
+        path: '/students-input-score',
+        name: 'students-input-score',
+        component: () => import('@/views/students-input-score')
+      },
+      {
+        path: '/query-teach',
+        name: 'query-teach',
+        component: () => import('@/views/query-teach')
+      },
+      {
+        path: '/class-manage',
+        name: 'class-manage',
+        component: () => import('@/views/class-manage')
       }
     ]
   }

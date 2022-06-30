@@ -79,7 +79,7 @@ const onFinish = (values) => {
       loading.value = false
       if (data.code === 10000) {
         message.success('登录成功')
-        router.push('/layout')
+        router.push('/students-manage')
       } else if (data.code === 10010) {
         message.error('用户名不存在')
       } else if (data.code === 10020) {
