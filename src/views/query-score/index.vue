@@ -57,14 +57,14 @@
             type="primary"
             ghost
             style="display: inline-block"
-            @click="showStuScore(record.Sno, record.Sname)"
+            @click="showRank(record.Cname, record.Cno)"
             >班级排名查询</a-button
           >
           <a-button
             type="primary"
             ghost
             style="display: inline-block; margin-left: 20px"
-            @click="showStuScore(record.Sno, record.Sname)"
+            @click="showAvg(record.Cname, record.Cno)"
             >课程平均分查询</a-button
           >
         </template>
@@ -172,6 +172,55 @@ export default defineComponent({
       return !(selectedValue.value !== '请选择学年')
     })
 
+    const showRank = (Cname, Cno) => {
+      if (selectedValue.value === 'to') {
+        message.warn('请选择具体学年后查询排名')
+      } else {
+        const data = {
+          Cno: Cno,
+          Sno: sno.value,
+          Year: selectedValue.value
+        }
+        http
+          .post('/getStuRank', data)
+          .then((response) => {
+            message.info({
+              content: () => Cname + '班级排名:' + response.rank,
+              style: {
+                marginTop: '10vh'
+              }
+            })
+          })
+          .catch((error) => {
+            message.error('网络连接失败' + error)
+          })
+      }
+    }
+    const showAvg = (Cname, Cno) => {
+      if (selectedValue.value === 'to') {
+        message.warn('请选择具体学年后查询平均分')
+      } else {
+        const data = {
+          Cno: Cno,
+          Year: selectedValue.value
+        }
+
+        http
+          .post('/getAvg', data)
+          .then((response) => {
+            message.info({
+              content: () => Cname + '平均分:' + response.AVG_SCORE,
+              style: {
+                marginTop: '10vh'
+              }
+            })
+          })
+          .catch((error) => {
+            message.error('网络连接失败' + error)
+          })
+      }
+    }
+
     return {
       sno,
       sname,
@@ -182,7 +231,9 @@ export default defineComponent({
       dataSource,
       columns,
       showStuScore,
-      disabled
+      disabled,
+      showRank,
+      showAvg
     }
   }
 })
