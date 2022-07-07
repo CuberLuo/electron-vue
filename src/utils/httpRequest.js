@@ -1,6 +1,7 @@
 // 封装fetch方法
 export class HttpRequest {
-  baseURL = 'http://localhost:3000'
+  // baseURL = 'http://localhost:3000'
+  baseURL = 'http://1.15.134.164:3000'
 
   async get(api) {
     const response = await fetch(this.baseURL + api, {
